@@ -25,8 +25,13 @@ namespace ObjectComparer.Tests
                 Grade = 'B',
                 Percentage = 76.01F,
                 Name = "John",
-                Marks = new[] { 80, 70, 90 },
-                Subjects = new List<string> { "C", "Java", "Python" }
+                Marks = null,
+                Subjects = new List<string> { "C", "Java", "Python" },
+                Address = new Dictionary<string, int>
+                {
+                    { "Chennai", 600089 },{ "Ongole", 523002 }
+                },
+                Values=new Test()
             };
             Student student2 = new Student()
             {
@@ -36,8 +41,12 @@ namespace ObjectComparer.Tests
                 Grade = 'B',
                 Percentage = 76.01F,
                 Name = "John",
-                Marks = new[] { 80, 90, 70 },
-                Subjects = new List<string> { "C", "Java", "Python" }
+                Marks = null,
+                Subjects = new List<string> { "C", "Java", "Python" },
+                Address = new Dictionary<string, int>
+                {
+                    { "Chennai", 600089 },{ "Ongole", 523002 }
+                }
             };
             Assert.IsTrue(Comparer.AreSimilar(student1, student2));
         }
@@ -110,7 +119,7 @@ namespace ObjectComparer.Tests
                 Grade = 'B',
                 Percentage = 74.01F,
                 Name = "Jack",
-                Marks = new[] { 60, 90, 70,30 },
+                Marks = new[] { 60, 90, 70, 30 },
                 Subjects = new List<string> { "C", "Java", "Python" }
             };
             Assert.IsFalse(Comparer.AreSimilar(student1, student2));

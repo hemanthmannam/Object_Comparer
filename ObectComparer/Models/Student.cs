@@ -16,5 +16,11 @@ namespace ObjectComparer.Models
         public string Name { get; set; }
         public int[] Marks { get; set; }
         public List<string> Subjects { get; set; }
+        public Dictionary<string, int> Address { get; set; }
+        public Test Values { get; set; }
+    }
+    public enum Test
+    {
+        Test1 = 1
     }
 }

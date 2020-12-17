@@ -35,6 +35,10 @@ namespace ObjectComparer.UnitOfWork
                 var FirstValue = type.GetProperty(property.Name).GetValue(first);
                 var SecondValue = type.GetProperty(property.Name).GetValue(second);
 
+                //if both the items are null then exit out of the current iteration as the values are same
+                if (FirstValue == null && SecondValue == null)
+                    continue;
+
                 //if type is Generic Type or Arrays
                 if (FirstValue.GetType().IsArray || SecondValue.GetType().IsArray ||
                 FirstValue.GetType().IsGenericType || SecondValue.GetType().IsGenericType)
