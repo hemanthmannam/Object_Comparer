@@ -43,58 +43,13 @@ namespace ObjectComparer.UnitOfWork
                     if ((FirstValue == null && SecondValue != null) || (FirstValue != null && SecondValue == null))
                         return false;
 
-                    List<bool> results = new List<bool>();
-                    int firstCount = 0, secondCount = 0;
-
-                    //set number of elements in First Array or Generic object
-                    foreach (var item in FirstValue as IEnumerable)
-                    {
-                        firstCount++;
-                    }
-                    //set number of elements in Second Array or Generic object
-                    foreach (var item in SecondValue as IEnumerable)
-                    {
-                        secondCount++;
-                    }
-
-
-                    //return if the counts are not equal as the object is not similar
-                    if (firstCount != secondCount)
-                    {
+                    //all the elements in the first object will be checked with al the elements in second object for similarity
+                    if (!ArrayGenericsComparer.AreArraysGenericObjectsSimilar(FirstValue, SecondValue))
                         return false;
-                    }
 
-                    //iterate through the items in the first object
-                    foreach (var firstElement in FirstValue as IEnumerable)
-                    {
-                        bool IsMatched = false;
-                        
-                        //iterate through second Object to find the match
-                        foreach (var secondElement in SecondValue as IEnumerable)
-                        {
-                            //if a match is found break out of the loop
-                            if (firstElement.ToString().Trim() == secondElement.ToString().Trim())
-                            {
-                                IsMatched = true;
-                                break;
-                            }
-                        }
-
-                        if (IsMatched)
-                        {
-                            results.Add(true);
-                        }
-                        else
-                        {
-                            results.Add(false);
-                        }
-                    }
-
-                    
-                    if (results.Any(a => a == false))
-                    {
+                    //all the elements in second object will be checked with all the elements in first object
+                    if (!ArrayGenericsComparer.AreArraysGenericObjectsSimilar(SecondValue, FirstValue))
                         return false;
-                    }
                 }
                 else
                 {
@@ -106,6 +61,8 @@ namespace ObjectComparer.UnitOfWork
             };
             return true;
         }
+
+
 
     }
 }
